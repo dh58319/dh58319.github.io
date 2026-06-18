@@ -19,7 +19,8 @@ deployed to GitHub Pages via GitHub Actions.
 ├── .github/workflows/deploy.yml   # CI/CD: builds and deploys to GitHub Pages
 ├── public/                        # Static files copied as-is (favicon, .nojekyll)
 ├── src/
-│   ├── data.js                    # ← ALL site content lives here (edit this!)
+│   ├── data.js                    # ← Main site content (profile, bio, research…)
+│   ├── blog.js                    # ← Blog posts live here
 │   ├── App.jsx                    # Routes + layout (navbar, footer)
 │   ├── main.jsx                   # App entry (HashRouter)
 │   ├── styles.css                 # Global styles + theme colors
@@ -27,8 +28,9 @@ deployed to GitHub Pages via GitHub Actions.
 │   │   ├── Navbar.jsx             # Top navigation bar
 │   │   └── Section.jsx            # Reusable section heading
 │   ├── pages/
-│   │   ├── Home.jsx               # Photo, Bio, Education, Skills, Awards
-│   │   ├── Research.jsx           # Interests, Projects, Publications, Experience
+│   │   ├── Home.jsx               # Photo, Bio, News, Education, Skills, Awards
+│   │   ├── Research.jsx           # Interests, Projects, Publications, Teaching, Experience
+│   │   ├── Blog.jsx               # Blog list + individual post pages
 │   │   └── Photography.jsx        # Auto-loading photo gallery + lightbox
 │   └── assets/
 │       ├── profile.jpg            # Profile photo
@@ -50,20 +52,23 @@ npm run preview  # preview the production build locally
 
 ## Editing Content
 
-All text content is in a single file: **`src/data.js`**. No need to touch the
-components for routine updates.
+All text content lives in **`src/data.js`** (and blog posts in **`src/blog.js`**).
+No need to touch the components for routine updates.
 
-| What to update | Where in `src/data.js` |
+| What to update | Where |
 |----------------|------------------------|
-| Name, title, email, social links | `profile` |
-| Bio paragraphs | `bio` |
-| Publications | `publications` (empty array shows "Coming soon") |
-| Work experience | `experience` |
-| Education | `education` |
-| Skills | `skills` |
-| Honors & awards | `awards` |
-| Research interests | `researchInterests` |
-| Research projects | `researchProjects` |
+| Name, title, email, social links | `data.js` → `profile` |
+| News / recent updates | `data.js` → `news` |
+| Bio paragraphs | `data.js` → `bio` |
+| Publications | `data.js` → `publications` (empty array shows "Coming soon") |
+| Work experience | `data.js` → `experience` |
+| Education | `data.js` → `education` |
+| Skills | `data.js` → `skills` |
+| Honors & awards | `data.js` → `awards` |
+| Research interests | `data.js` → `researchInterests` |
+| Research projects | `data.js` → `researchProjects` |
+| Teaching | `data.js` → `teaching` |
+| Blog posts | `blog.js` → `blogPosts` |
 
 ## Adding Photos to the Gallery
 

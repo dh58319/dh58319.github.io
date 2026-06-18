@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
-import { blogPosts } from '../data.js'
+import { blogPosts } from '../blog.js'
 
 export default function Blog() {
   const posts = [...blogPosts].sort((a, b) =>

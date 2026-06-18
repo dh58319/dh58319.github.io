@@ -132,20 +132,3 @@ export const teaching = [
   //   period: 'Spring 2025',
   // },
 ]
-
-// Blog posts. Each post can either have an internal `body` (array of paragraphs)
-// or an external `url` that links out to another site.
-export const blogPosts = [
-  {
-    slug: 'hello-world',
-    title: 'Hello, World',
-    date: '2024-06-18',
-    summary:
-      'Welcome to my blog. I plan to write about machine learning, robotics, and things I learn along the way.',
-    body: [
-      'Welcome to my blog! This is where I will share notes on my research in machine learning, Vision-Language-Action models, and embodied AI.',
-      'Stay tuned for posts about papers I find interesting, lessons from building real systems, and the occasional photography note.',
-    ],
-    // url: 'https://example.com/external-post', // use instead of body to link out
-  },
-]
