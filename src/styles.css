@@ -527,6 +527,30 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* ===== Instagram link (Photography) ===== */
+.insta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--fg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.insta-link:hover {
+  color: #fff;
+  background: var(--navy);
+  border-color: var(--navy);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
 /* ===== Social links + CV button ===== */
 .socials {
   display: flex;

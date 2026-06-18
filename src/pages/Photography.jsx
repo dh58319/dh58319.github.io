@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import Icon from '../components/Icon.jsx'
 
 // Auto-load every image dropped into src/assets/gallery/.
 const modules = import.meta.glob(
@@ -35,6 +36,15 @@ export default function Photography() {
       <div className="page-head">
         <h1 className="page-title">Photography</h1>
         <p className="page-subtitle">A selection of photographs.</p>
+        <a
+          className="insta-link"
+          href="https://instagram.com/dobbypic"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Icon name="instagram" size={18} />
+          <span>@dobbypic</span>
+        </a>
       </div>
 
       {photos.length === 0 ? (
