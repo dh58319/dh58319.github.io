@@ -1,9 +1,11 @@
 import Section from '../components/Section.jsx'
+import Icon from '../components/Icon.jsx'
 import {
   researchInterests,
   researchProjects,
   publications,
   experience,
+  teaching,
 } from '../data.js'
 
 export default function Research() {
@@ -48,6 +50,22 @@ export default function Research() {
                     ))}
                   </ul>
                 )}
+                {p.links?.length > 0 && (
+                  <p className="entry-links">
+                    {p.links.map((l) => (
+                      <a
+                        key={l.label}
+                        href={l.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="entry-link"
+                      >
+                        <Icon name={l.icon || 'external'} size={14} />
+                        {l.label}
+                      </a>
+                    ))}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
@@ -80,6 +98,23 @@ export default function Research() {
           </ol>
         )}
       </Section>
+
+      {teaching?.length > 0 && (
+        <Section id="teaching" title="Teaching">
+          <ul className="timeline">
+            {teaching.map((t, i) => (
+              <li key={i} className="entry">
+                <div className="entry-head">
+                  <span className="entry-role">{t.role}</span>
+                  {t.period && <span className="entry-period">{t.period}</span>}
+                </div>
+                {t.course && <p className="entry-org">{t.course}</p>}
+                {t.note && <p className="entry-note">{t.note}</p>}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       {experience?.length > 0 && (
         <Section id="experience" title="Experience">

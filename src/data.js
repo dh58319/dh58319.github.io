@@ -5,14 +5,32 @@ export const profile = {
   affiliation: 'Ajou University, Suwon, South Korea',
   email: 'dh58319@ajou.ac.kr',
   location: 'South Korea',
-  links: [
+  // To enable the "CV" button: drop your PDF at public/cv.pdf and set cv: '/cv.pdf'
+  cv: '',
+  // Social links shown as icons. Available icons: email, linkedin, github, scholar, twitter.
+  socials: [
+    { label: 'Email', href: 'mailto:dh58319@ajou.ac.kr', icon: 'email' },
     {
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/donghyun-kim-1b538a225',
+      icon: 'linkedin',
     },
-    { label: 'Email', href: 'mailto:dh58319@ajou.ac.kr' },
+    { label: 'GitHub', href: 'https://github.com/dh58319', icon: 'github' },
+    // { label: 'Google Scholar', href: 'https://scholar.google.com/', icon: 'scholar' },
   ],
 }
+
+// Short timeline of recent updates, shown on the Home page.
+export const news = [
+  {
+    date: 'Mar 2024',
+    text: 'Started my integrated M.S and Ph.D. in Artificial Intelligence at Ajou University.',
+  },
+  {
+    date: '2023',
+    text: 'Won the Grand Prize at the Virtual Environment-based Autonomous Driving Competition.',
+  },
+]
 
 export const bio = [
   `I am a Ph.D. student in Artificial Intelligence at Ajou University, where I also
@@ -92,6 +110,8 @@ export const researchProjects = [
     summary:
       'Developed and tuned deep learning models for autonomous driving in a virtual environment. Awarded the Grand Prize at the competition.',
     tags: ['Vision-Language-Action Models', 'OpenCV', 'Computer Vision'],
+    // Optional links: { label: 'Code', href: '...' }, { label: 'Demo', href: '...' }
+    links: [],
   },
   {
     title: 'Medical AI Idea',
@@ -99,5 +119,33 @@ export const researchProjects = [
     summary:
       'Explored applications of artificial intelligence to medical problems as part of the 2023 Medical AI Idea Competition.',
     tags: ['Medical AI', 'Machine Learning'],
+    links: [],
+  },
+]
+
+// Teaching / mentoring activities. Add entries as needed.
+export const teaching = [
+  // {
+  //   role: 'Teaching Assistant',
+  //   course: 'Introduction to Machine Learning',
+  //   org: 'Ajou University',
+  //   period: 'Spring 2025',
+  // },
+]
+
+// Blog posts. Each post can either have an internal `body` (array of paragraphs)
+// or an external `url` that links out to another site.
+export const blogPosts = [
+  {
+    slug: 'hello-world',
+    title: 'Hello, World',
+    date: '2024-06-18',
+    summary:
+      'Welcome to my blog. I plan to write about machine learning, robotics, and things I learn along the way.',
+    body: [
+      'Welcome to my blog! This is where I will share notes on my research in machine learning, Vision-Language-Action models, and embodied AI.',
+      'Stay tuned for posts about papers I find interesting, lessons from building real systems, and the occasional photography note.',
+    ],
+    // url: 'https://example.com/external-post', // use instead of body to link out
   },
 ]

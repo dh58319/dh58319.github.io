@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { profile } from '../data.js'
+import ThemeToggle from './ThemeToggle.jsx'
 
 const navItems = [
   { to: '/', label: 'Home', end: true },
   { to: '/research', label: 'Research' },
+  { to: '/blog', label: 'Blog' },
   { to: '/photography', label: 'Photography' },
 ]
 
@@ -41,6 +43,7 @@ export default function Navbar() {
               {item.label}
             </NavLink>
           ))}
+          <ThemeToggle />
         </nav>
       </div>
     </header>

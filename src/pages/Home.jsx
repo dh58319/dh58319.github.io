@@ -1,5 +1,6 @@
 import Section from '../components/Section.jsx'
-import { profile, bio, education, skills, awards } from '../data.js'
+import SocialLinks from '../components/SocialLinks.jsx'
+import { profile, bio, news, education, skills, awards } from '../data.js'
 import profilePhoto from '../assets/profile.jpg'
 
 export default function Home() {
@@ -11,14 +12,7 @@ export default function Home() {
           <h1 className="name">{profile.name}</h1>
           <p className="title">{profile.title}</p>
           <p className="affiliation">{profile.affiliation}</p>
-          <nav className="links" aria-label="Profile links">
-            <a href={`mailto:${profile.email}`}>{profile.email}</a>
-            {profile.links.map((l) => (
-              <a key={l.label} href={l.href} target="_blank" rel="noreferrer">
-                {l.label}
-              </a>
-            ))}
-          </nav>
+          <SocialLinks />
         </div>
       </header>
 
@@ -29,6 +23,19 @@ export default function Home() {
           </p>
         ))}
       </Section>
+
+      {news?.length > 0 && (
+        <Section id="news" title="News">
+          <ul className="news-list">
+            {news.map((n, i) => (
+              <li key={i} className="news-item">
+                <span className="news-date">{n.date}</span>
+                <span className="news-text">{n.text}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
 
       <Section id="education" title="Education">
         <ul className="timeline">
