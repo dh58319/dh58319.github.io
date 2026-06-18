@@ -1,12 +1,15 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
-import Home from './pages/Home.jsx'
-import Research from './pages/Research.jsx'
-import Blog from './pages/Blog.jsx'
-import BlogPost from './pages/BlogPost.jsx'
-import Photography from './pages/Photography.jsx'
 import { profile } from './data.js'
+
+// Route-level code splitting: each page (and its dependencies, e.g. marked on
+// the blog) is loaded only when that route is visited.
+const Home = lazy(() => import('./pages/Home.jsx'))
+const Research = lazy(() => import('./pages/Research.jsx'))
+const Blog = lazy(() => import('./pages/Blog.jsx'))
+const BlogPost = lazy(() => import('./pages/BlogPost.jsx'))
+const Photography = lazy(() => import('./pages/Photography.jsx'))
 
 export default function App() {
   const location = useLocation()
@@ -19,14 +22,16 @@ export default function App() {
     <div className="app">
       <Navbar />
       <main className="page" key={location.pathname}>
-        <Routes location={location}>
-          <Route path="/" element={<Home />} />
-          <Route path="/research" element={<Research />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/photography" element={<Photography />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
+        <Suspense fallback={<div className="route-fallback" aria-hidden="true" />}>
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/research" element={<Research />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/photography" element={<Photography />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </Suspense>
       </main>
       <footer className="footer">
         <div className="footer-inner">

@@ -12,4 +12,14 @@ export default defineConfig({
   // Treat uppercase image extensions as static assets (Vite's defaults are lowercase only).
   assetsInclude: ['**/*.JPG', '**/*.JPEG', '**/*.PNG', '**/*.WEBP'],
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        // Keep framework code in a stable vendor chunk for long-term caching.
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 })

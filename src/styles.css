@@ -527,6 +527,11 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Suspense fallback while a route chunk loads */
+.route-fallback {
+  min-height: 60vh;
+}
+
 /* ===== Instagram link (Photography) ===== */
 .insta-link {
   display: inline-flex;

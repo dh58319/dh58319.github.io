@@ -28,7 +28,13 @@ export default function Photography() {
         setActive((i) => (i - 1 + photos.length) % photos.length)
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    // Prevent the page behind the lightbox from scrolling.
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
   }, [active, close])
 
   return (
