@@ -13,6 +13,7 @@ const Photography = lazy(() => import('./pages/Photography.jsx'))
 
 export default function App() {
   const location = useLocation()
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -21,7 +22,7 @@ export default function App() {
   return (
     <div className="app">
       <Navbar />
-      <main className="page" key={location.pathname}>
+      <main className={`page${isHome ? ' page-home' : ''}`} key={location.pathname}>
         <Suspense fallback={<div className="route-fallback" aria-hidden="true" />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />

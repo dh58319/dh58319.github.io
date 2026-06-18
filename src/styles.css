@@ -85,17 +85,16 @@ a:hover {
   padding: 2.5rem 1.25rem 3rem;
 }
 
-/* Navbar (deep navy) */
+/* Navbar (clean, theme surface) */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--navy) 82%, transparent);
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   backdrop-filter: saturate(180%) blur(12px);
-  color: var(--navy-fg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+  color: var(--fg);
+  border-bottom: 1px solid var(--border);
 }
 
 .navbar-inner {
@@ -109,7 +108,7 @@ a:hover {
 }
 
 .brand {
-  color: var(--navy-fg);
+  color: var(--fg);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.05rem;
@@ -128,7 +127,7 @@ a:hover {
 }
 
 .nav-links a {
-  color: var(--navy-muted);
+  color: var(--muted);
   font-size: 0.95rem;
   font-weight: 500;
   padding: 0.25rem 0;
@@ -136,12 +135,12 @@ a:hover {
 }
 
 .nav-links a:hover {
-  color: var(--navy-fg);
+  color: var(--fg);
   text-decoration: none;
 }
 
 .nav-links a.active {
-  color: #fff;
+  color: var(--fg);
   border-bottom-color: var(--brand);
 }
 
@@ -158,7 +157,7 @@ a:hover {
 .nav-toggle span {
   width: 22px;
   height: 2px;
-  background: var(--navy-fg);
+  background: var(--fg);
   border-radius: 2px;
 }
 
@@ -531,7 +530,8 @@ a:hover {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
-    background: var(--navy);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
     padding: 0 1.25rem;
     max-height: 0;
     overflow: hidden;
@@ -577,6 +577,72 @@ body {
 /* Suspense fallback while a route chunk loads */
 .route-fallback {
   min-height: 60vh;
+}
+
+/* ===== Home two-column layout ===== */
+.page-home {
+  max-width: 1080px;
+}
+
+.home-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 310px) 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.home-aside {
+  position: sticky;
+  top: 80px;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--brand), 0 8px 24px rgba(15, 34, 64, 0.18);
+  margin-bottom: 1.25rem;
+}
+
+.profile-card .name {
+  font-size: 1.7rem;
+}
+
+.profile-card .title {
+  margin-top: 0.4rem;
+}
+
+.profile-card .socials {
+  margin-top: 1.1rem;
+}
+
+/* First section in the scrolling column aligns with the profile card top */
+.home-main > .section:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 860px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .home-aside {
+    position: static;
+  }
+  .profile-card {
+    align-items: center;
+    text-align: center;
+  }
+  .profile-card .socials {
+    justify-content: center;
+  }
 }
 
 /* ===== Instagram link (Photography) ===== */
@@ -660,16 +726,16 @@ body {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--border);
   background: transparent;
-  color: var(--navy-fg);
+  color: var(--fg);
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 .theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--card);
   transform: rotate(-12deg);
 }
 
