@@ -9,5 +9,7 @@ const base = process.env.BASE_PATH ?? '/'
 
 export default defineConfig({
   base,
+  // Treat uppercase image extensions as static assets (Vite's defaults are lowercase only).
+  assetsInclude: ['**/*.JPG', '**/*.JPEG', '**/*.PNG', '**/*.WEBP'],
   plugins: [react()],
 })
