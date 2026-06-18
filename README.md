@@ -20,7 +20,8 @@ deployed to GitHub Pages via GitHub Actions.
 ├── public/                        # Static files copied as-is (favicon, .nojekyll)
 ├── src/
 │   ├── data.js                    # ← Main site content (profile, bio, research…)
-│   ├── blog.js                    # ← Blog posts live here
+│   ├── blog.js                    # Loads blog posts from content/posts/*.md
+│   ├── content/posts/             # ← Blog posts: one Markdown file per post
 │   ├── App.jsx                    # Routes + layout (navbar, footer)
 │   ├── main.jsx                   # App entry (HashRouter)
 │   ├── styles.css                 # Global styles + theme colors
@@ -68,7 +69,27 @@ No need to touch the components for routine updates.
 | Research interests | `data.js` → `researchInterests` |
 | Research projects | `data.js` → `researchProjects` |
 | Teaching | `data.js` → `teaching` |
-| Blog posts | `blog.js` → `blogPosts` |
+| Blog posts | Add a Markdown file in `src/content/posts/` (see below) |
+
+### Writing a Blog Post
+
+Create a new Markdown file in `src/content/posts/`, e.g. `my-first-post.md`:
+
+```md
+---
+title: My First Post
+date: 2026-06-18
+summary: A short blurb shown in the blog list.
+---
+
+Write your post here in **Markdown**. Headings, lists, links, images,
+code blocks — all supported.
+```
+
+- The filename becomes the URL slug (`my-first-post.md` → `/blog/my-first-post`).
+- Posts are sorted by `date` (newest first).
+- To link out to an external article instead, add a `url:` field to the
+  frontmatter — the body is then ignored and the card links out.
 
 ## Adding Photos to the Gallery
 

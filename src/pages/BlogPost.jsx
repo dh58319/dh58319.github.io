@@ -27,11 +27,10 @@ export default function BlogPost() {
         <h1 className="page-title">{post.title}</h1>
         <p className="blog-date">{post.date}</p>
       </header>
-      <div className="blog-post-body">
-        {post.body?.map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
-      </div>
+      <div
+        className="blog-post-body"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+      />
     </article>
   )
 }

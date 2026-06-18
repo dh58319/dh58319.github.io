@@ -3,9 +3,7 @@ import Icon from '../components/Icon.jsx'
 import { blogPosts } from '../blog.js'
 
 export default function Blog() {
-  const posts = [...blogPosts].sort((a, b) =>
-    (b.date || '').localeCompare(a.date || ''),
-  )
+  const posts = blogPosts
 
   return (
     <>
