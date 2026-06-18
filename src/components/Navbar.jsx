@@ -6,8 +6,8 @@ import ThemeToggle from './ThemeToggle.jsx'
 const navItems = [
   { to: '/', label: 'Home', end: true },
   { to: '/research', label: 'Research' },
-  { to: '/blog', label: 'Blog' },
   { to: '/photography', label: 'Photography' },
+  { to: '/blog', label: 'Blog' },
 ]
 
 export default function Navbar() {
