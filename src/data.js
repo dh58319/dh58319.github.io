@@ -67,7 +67,7 @@ export const education = [
   {
     degree: 'Integrated M.S. and Ph.D. in Artificial Intelligence',
     org: 'Ajou University',
-    period: 'Mar 2024 – Feb 2030 (expected)',
+    period: 'Mar 2024 – 2030 (expected)',
     note: '',
   },
   {
@@ -99,7 +99,8 @@ export const awards = [
       'Grand Prize — Virtual Environment-based Autonomous Driving Competition',
     year: 2023,
   },
-  { title: '2023 Medical AI Idea Competition', year: 2023 },
+  { title: 'The Korean Medical Association President\'s Award — 2023 Medical AI Idea Competition', 
+    year: 2023 },
 ]
 
 export const researchInterests = [
@@ -120,7 +121,7 @@ export const researchProjects = [
     links: [],
   },
   {
-    title: 'Medical AI Idea',
+    title: 'Medical AI Idea Competition',
     period: '2023',
     summary:
       'Explored applications of artificial intelligence to medical problems as part of the 2023 Medical AI Idea Competition.',
