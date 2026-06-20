@@ -13,8 +13,7 @@ export default function Research() {
       <div className="page-head">
         <h1 className="page-title">Research</h1>
         <p className="page-subtitle">
-          Machine learning and deep learning, with applications to medical AI and
-          autonomous driving.
+          Machine learning and deep learning, with applications to VLA and Medical AI.
         </p>
       </div>
 
