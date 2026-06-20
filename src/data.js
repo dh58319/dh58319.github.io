@@ -24,7 +24,11 @@ export const profile = {
 export const news = [
   {
     date: 'Mar 2024',
-    text: 'Started my integrated M.S and Ph.D. in Artificial Intelligence at Ajou University.',
+    text: 'Started my Integrated M.S and Ph.D. in Artificial Intelligence at Ajou University.',
+  },
+  {
+    date: 'Feb 2024',
+    text: 'Completed my B.E. in Computer Science (Software) and a micro degree in Artificial Intelligence in Medicine at Ajou University.',
   },
   {
     date: '2023',
@@ -42,7 +46,9 @@ export const bio = [
   My current research focuses on building reliable multimodal systems that can understand physical environments and support robust robotic execution.`,
 ]
 
-export const publications = []
+export const publications = [
+  
+]
 
 export const experience = [
   {
@@ -59,7 +65,7 @@ export const experience = [
 
 export const education = [
   {
-    degree: 'Ph.D. in Artificial Intelligence',
+    degree: 'Integrated M.S. and Ph.D. in Artificial Intelligence',
     org: 'Ajou University',
     period: 'Mar 2024 – Feb 2030 (expected)',
     note: '',
@@ -125,10 +131,22 @@ export const researchProjects = [
 
 // Teaching / mentoring activities. Add entries as needed.
 export const teaching = [
-  // {
-  //   role: 'Teaching Assistant',
-  //   course: 'Introduction to Machine Learning',
-  //   org: 'Ajou University',
-  //   period: 'Spring 2025',
-  // },
+  {
+    role: 'Teaching Assistant',
+    course: 'Linear Algebra',
+    org: 'Ajou University',
+    period: 'Spring 2024',
+  },
+    {
+    role: 'Teaching Assistant',
+    course: 'Computer Programming',
+    org: 'Ajou University',
+    period: 'Fall 2024, Spring 2025',
+  },
+      {
+    role: 'Teaching Assistant',
+    course: 'Database',
+    org: 'Ajou University',
+    period: 'Fall 2025, Spring 2026',
+  },
 ]

@@ -1,10 +1,11 @@
 import Section from '../components/Section.jsx'
 import SocialLinks from '../components/SocialLinks.jsx'
+import PublicationList from '../components/PublicationList.jsx'
+import SkillList from '../components/SkillList.jsx'
 import {
   profile,
   bio,
   news,
-  publications,
   education,
   experience,
   skills,
@@ -48,30 +49,7 @@ export default function Home() {
         )}
 
         <Section id="publications" title="Publications">
-          {publications.length === 0 ? (
-            <p className="empty-note">Coming soon.</p>
-          ) : (
-            <ol className="pub-list">
-              {publications.map((p, i) => (
-                <li key={i} className="pub">
-                  <p className="pub-title">{p.title}</p>
-                  <p className="pub-authors">{p.authors}</p>
-                  <p className="pub-venue">
-                    <span className="pub-venue-name">{p.venue}</span>, {p.year}
-                  </p>
-                  {p.links?.length > 0 && (
-                    <p className="pub-links">
-                      {p.links.map((l) => (
-                        <a key={l.label} href={l.href} target="_blank" rel="noreferrer">
-                          {l.label}
-                        </a>
-                      ))}
-                    </p>
-                  )}
-                </li>
-              ))}
-            </ol>
-          )}
+          <PublicationList />
         </Section>
 
         <Section id="education" title="Education">
@@ -134,13 +112,7 @@ export default function Home() {
 
         {skills?.length > 0 && (
           <Section id="skills" title="Skills">
-            <ul className="skill-list">
-              {skills.map((s) => (
-                <li key={s} className="skill">
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <SkillList items={skills} />
           </Section>
         )}
       </div>
