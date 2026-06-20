@@ -69,34 +69,12 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(60rem 60rem at 85% -10%, rgba(13, 148, 136, 0.1), transparent 60%),
-    radial-gradient(48rem 48rem at -10% 20%, rgba(45, 212, 191, 0.08), transparent 55%),
-    var(--bg);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-
-:root[data-theme='dark'] body {
-  background:
-    radial-gradient(60rem 60rem at 85% -10%, rgba(45, 212, 191, 0.14), transparent 60%),
-    radial-gradient(48rem 48rem at -10% 20%, rgba(13, 148, 136, 0.1), transparent 55%),
-    var(--bg);
-  background-attachment: fixed;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) body {
-    background:
-      radial-gradient(60rem 60rem at 85% -10%, rgba(45, 212, 191, 0.14), transparent 60%),
-      radial-gradient(48rem 48rem at -10% 20%, rgba(13, 148, 136, 0.1), transparent 55%),
-      var(--bg);
-    background-attachment: fixed;
-  }
 }
 
 a {
@@ -314,22 +292,17 @@ a:hover {
 }
 
 .skill {
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 0.25rem 0.8rem;
+  padding: 0.25rem 0.75rem;
   font-size: 0.9rem;
   color: var(--fg);
-  box-shadow: 0 1px 0 var(--glass-hi) inset;
-  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 .skill:hover {
   border-color: var(--brand);
   color: var(--brand);
-  transform: translateY(-1px);
 }
 
 .skill-list.compact {
@@ -348,17 +321,7 @@ a:hover {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.pub {
-  padding: 1.1rem 1.25rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow);
+  gap: 1.4rem;
 }
 
 .pub-title {
@@ -392,23 +355,7 @@ a:hover {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.timeline .entry {
-  padding: 1.1rem 1.25rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow), 0 1px 0 var(--glass-hi) inset;
-  transition: transform 0.18s ease, border-color 0.18s ease;
-}
-
-.timeline .entry:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--accent) 50%, var(--glass-border));
+  gap: 1.5rem;
 }
 
 .entry-head {
@@ -540,11 +487,9 @@ a:hover {
 .lightbox-close,
 .lightbox-nav {
   position: absolute;
-  background: rgba(255, 255, 255, 0.14);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 0;
   cursor: pointer;
   border-radius: 999px;
   display: flex;
@@ -672,13 +617,6 @@ body {
 .profile-card {
   display: flex;
   flex-direction: column;
-  padding: 1.6rem 1.4rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 22px;
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow), 0 1px 0 var(--glass-hi) inset;
 }
 
 .profile-card-photo {
@@ -732,15 +670,11 @@ body {
   gap: 0.45rem;
   margin-top: 0.85rem;
   padding: 0.4rem 0.85rem;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--fg);
   font-size: 0.9rem;
   font-weight: 600;
-  box-shadow: 0 1px 0 var(--glass-hi) inset;
   transition: transform 0.15s ease, color 0.15s ease, border-color 0.15s ease,
     background-color 0.15s ease;
 }
@@ -768,13 +702,9 @@ body {
   justify-content: center;
   width: 38px;
   height: 38px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
   border-radius: 50%;
   color: var(--fg);
-  box-shadow: 0 1px 0 var(--glass-hi) inset;
   transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease,
     background-color 0.15s ease;
 }
@@ -814,10 +744,8 @@ body {
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+  background: transparent;
   color: var(--fg);
   border-radius: 50%;
   cursor: pointer;
@@ -833,16 +761,10 @@ body {
 .news-list {
   list-style: none;
   margin: 0;
-  padding: 1.1rem 1.25rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow), 0 1px 0 var(--glass-hi) inset;
 }
 
 .news-item {
@@ -932,20 +854,17 @@ body {
 }
 
 .blog-card {
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--glass-shadow), 0 1px 0 var(--glass-hi) inset;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
   transition: transform 0.18s ease, box-shadow 0.18s ease,
     border-color 0.18s ease;
 }
 
 .blog-card:hover {
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--accent) 60%, var(--glass-border));
-  box-shadow: 0 14px 36px rgba(15, 34, 64, 0.16), 0 1px 0 var(--glass-hi) inset;
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .blog-card-link {
