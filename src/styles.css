@@ -2,8 +2,8 @@
   --bg: #ffffff;
   --fg: #14181f;
   --muted: #5c636e;
-  --accent: #0d9488;
-  --brand: #0d9488;
+  --accent: #0f2240;
+  --brand: #0f2240;
   --border: #e6e8eb;
   --card: #f7f8fa;
   --navy: #0f2240;
@@ -15,11 +15,11 @@
   --font-display: 'Space Grotesk', var(--font-sans);
 
   /* Liquid glass */
-  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.38);
   --glass-border: rgba(255, 255, 255, 0.55);
   --glass-hi: rgba(255, 255, 255, 0.85);
   --glass-shadow: 0 10px 30px rgba(15, 34, 64, 0.12);
-  --glass-blur: blur(18px) saturate(180%);
+  --glass-blur: blur(26px) saturate(200%);
 }
 
 /* Dark palette shared by OS preference and manual toggle */
@@ -28,8 +28,8 @@
     --bg: #0d0f13;
     --fg: #e8eaed;
     --muted: #9aa0a6;
-    --accent: #2dd4bf;
-    --brand: #2dd4bf;
+    --accent: #7aa2d8;
+    --brand: #7aa2d8;
     --border: #23272e;
     --card: #15181d;
     --navy: #0b1a30;
@@ -46,8 +46,8 @@
   --bg: #0d0f13;
   --fg: #e8eaed;
   --muted: #9aa0a6;
-  --accent: #2dd4bf;
-  --brand: #2dd4bf;
+  --accent: #7aa2d8;
+  --brand: #7aa2d8;
   --border: #23272e;
   --card: #15181d;
   --navy: #0b1a30;
@@ -75,6 +75,35 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Soft background tones for the glass to frost over */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(640px 480px at 12% 8%, rgba(15, 34, 64, 0.14), transparent 60%),
+    radial-gradient(720px 560px at 92% 0%, rgba(15, 34, 64, 0.1), transparent 55%),
+    radial-gradient(680px 600px at 80% 95%, rgba(15, 34, 64, 0.09), transparent 60%);
+}
+
+:root[data-theme='dark'] body::before {
+  background:
+    radial-gradient(640px 480px at 12% 8%, rgba(122, 162, 216, 0.1), transparent 60%),
+    radial-gradient(720px 560px at 92% 0%, rgba(122, 162, 216, 0.07), transparent 55%),
+    radial-gradient(680px 600px at 80% 95%, rgba(122, 162, 216, 0.06), transparent 60%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) body::before {
+    background:
+      radial-gradient(640px 480px at 12% 8%, rgba(122, 162, 216, 0.1), transparent 60%),
+      radial-gradient(720px 560px at 92% 0%, rgba(122, 162, 216, 0.07), transparent 55%),
+      radial-gradient(680px 600px at 80% 95%, rgba(122, 162, 216, 0.06), transparent 60%);
+  }
 }
 
 a {
@@ -125,7 +154,7 @@ a:hover {
 
 .brand {
   color: var(--fg);
-  font-family: var(--font-display);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, sans-serif;
   font-weight: 700;
   font-size: 1.05rem;
   letter-spacing: 0.01em;
@@ -200,7 +229,7 @@ a:hover {
 }
 
 .name {
-  font-family: var(--font-display);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', -apple-system, sans-serif;
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
@@ -617,15 +646,36 @@ body {
 .profile-card {
   display: flex;
   flex-direction: column;
+  padding: 1.75rem 1.5rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.25));
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 12px 34px rgba(15, 34, 64, 0.1);
+}
+
+:root[data-theme='dark'] .profile-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset, 0 12px 34px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .profile-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset, 0 12px 34px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .profile-card-photo {
-  width: 150px;
-  height: 150px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--bg);
-  box-shadow: 0 0 0 2px var(--brand), 0 8px 24px rgba(15, 34, 64, 0.18);
+  border: 1px solid rgba(15, 34, 64, 0.08);
+  box-shadow: 0 4px 14px rgba(15, 34, 64, 0.1);
   margin-bottom: 1.25rem;
 }
 
