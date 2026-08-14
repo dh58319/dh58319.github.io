@@ -3,13 +3,13 @@ export const profile = {
   name: 'Donghyun Kim',
   title: 'PhD Student · Artificial Intelligence',
   affiliation: 'Ajou University, Suwon, South Korea',
-  email: 'dh58319@ajou.ac.kr',
+  email: 'donghyunkim@ajou.ac.kr',
   location: 'South Korea',
   // To enable the "CV" button: drop your PDF at public/cv.pdf and set cv: '/cv.pdf'
   cv: '',
   // Social links shown as icons. Available icons: email, linkedin, github, scholar, twitter.
   socials: [
-    { label: 'Email', href: 'mailto:dh58319@ajou.ac.kr', icon: 'email' },
+    { label: 'Email', href: 'mailto:donghyunkim@ajou.ac.kr', icon: 'email' },
     {
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/donghyun-kim-1b538a225',
