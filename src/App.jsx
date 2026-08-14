@@ -37,6 +37,8 @@ export default function App() {
       <footer className="footer">
         <div className="footer-inner">
           © {new Date().getFullYear()} {profile.name} · {profile.location}
+          <span className="footer-separator" aria-hidden="true">·</span>
+          <a href={`mailto:${profile.email}`}>Contact: {profile.email}</a>
         </div>
       </footer>
     </div>
