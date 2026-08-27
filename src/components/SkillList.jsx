@@ -1,4 +1,4 @@
-// Shared pill list used for skills, research interests, and project tags.
+// Shared list used for skills, research interests, and project tags.
 export default function SkillList({ items, compact = false }) {
   return (
     <ul className={`skill-list${compact ? ' compact' : ''}`}>

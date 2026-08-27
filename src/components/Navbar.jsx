@@ -21,9 +21,11 @@ export default function Navbar() {
         </NavLink>
 
         <button
+          type="button"
           className="nav-toggle"
           aria-label="Toggle navigation"
           aria-expanded={open}
+          aria-controls="primary-navigation"
           onClick={() => setOpen((v) => !v)}
         >
           <span />
@@ -31,7 +33,7 @@ export default function Navbar() {
           <span />
         </button>
 
-        <nav className={`nav-links ${open ? 'open' : ''}`}>
+        <nav id="primary-navigation" className={`nav-links ${open ? 'open' : ''}`}>
           {navItems.map((item) => (
             <NavLink
               key={item.to}

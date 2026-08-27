@@ -3,7 +3,11 @@ import { publications } from '../data.js'
 // Shared publications renderer used on Home and Research.
 export default function PublicationList() {
   if (publications.length === 0) {
-    return <p className="empty-note">Coming soon.</p>
+    return (
+      <div className="empty-publications">
+        <p className="empty-note">Publications will appear here as they become available.</p>
+      </div>
+    )
   }
 
   return (

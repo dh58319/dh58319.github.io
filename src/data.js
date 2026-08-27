@@ -3,6 +3,7 @@ export const profile = {
   name: 'Donghyun Kim',
   title: 'PhD Student · Artificial Intelligence',
   affiliation: 'Ajou University, Suwon, South Korea',
+  advisor: 'Advisor: Prof. Jongbin Ryu',
   email: 'donghyunkim@ajou.ac.kr',
   location: 'South Korea',
   // To enable the "CV" button: drop your PDF at public/cv.pdf and set cv: '/cv.pdf'
@@ -24,7 +25,7 @@ export const profile = {
 export const news = [
   {
     date: 'Mar 2024',
-    text: 'Started my Integrated M.S and Ph.D. in Artificial Intelligence at Ajou University.',
+    text: 'Joined CVL-Lab and started my Integrated M.S. and Ph.D. in Artificial Intelligence at Ajou University.',
   },
   {
     date: 'Feb 2024',
@@ -51,6 +52,34 @@ export const publications = [
 ]
 
 export const experience = [
+  {
+    role: 'Server Infrastructure Administrator',
+    org: 'CVL-Lab, Ajou University',
+    period: '2024 – Present',
+    location: 'Suwon, South Korea',
+    points: [
+      'Manage and maintain the lab’s server infrastructure for research workloads.',
+      'Support GPU environments, Docker-based services, storage, and access control.',
+    ],
+  },
+  {
+    role: 'Assistant Teacher, AI/SW Research Mentorship Program',
+    org: 'Ajou University Science Gifted Education Center',
+    period: '2024 – Present',
+    location: 'Suwon, South Korea',
+    points: [
+      'Support research mentoring activities in AI and software for gifted students.',
+    ],
+  },
+  {
+    role: 'Member, Google Developer Student Clubs (GDSC)',
+    org: 'Ajou University',
+    period: '2022 – 2023',
+    location: 'Suwon, South Korea',
+    points: [
+      'Completed activities as a member of Google Developer Student Clubs at Ajou University.',
+    ],
+  },
   {
     role: 'KATUSA, Eighth Army Public Affairs Office',
     org: 'US Eighth Army',
@@ -99,7 +128,7 @@ export const awards = [
       'Grand Prize — Virtual Environment-based Autonomous Driving Competition',
     year: 2023,
   },
-  { title: 'The Korean Medical Association President\'s Award — 2023 Medical AI Idea Competition', 
+  { title: 'Korean Society of Medical Informatics President\'s Award — 2023 Medical AI Idea Competition',
     year: 2023 },
 ]
 
