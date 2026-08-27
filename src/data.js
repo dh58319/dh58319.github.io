@@ -1,8 +1,8 @@
 // Edit this file to update your portfolio content.
 export const profile = {
   name: 'Donghyun Kim',
-  title: 'PhD Student · Artificial Intelligence',
-  affiliation: 'Ajou University, Suwon, South Korea',
+  title: 'PhD Student\nArtificial Intelligence',
+  affiliation: 'Ajou University, Suwon\nSouth Korea',
   advisor: 'Advisor: Prof. Jongbin Ryu',
   email: 'donghyunkim@ajou.ac.kr',
   location: 'South Korea',
