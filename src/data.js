@@ -100,7 +100,7 @@ export const education = [
     note: '',
   },
   {
-    degree: 'Micro degree in Artificial Intelligence in Medicine',
+    degree: 'Micro-degree in Artificial Intelligence in Medicine',
     org: 'Ajou University',
     period: 'Feb 2024',
     note: '',
@@ -115,11 +115,11 @@ export const education = [
 
 export const skills = [
   'PyTorch',
+  'Vision-Language-Action Models',
   'Machine Learning',
   'Deep Learning',
+  'Docker',
   'Software Development',
-  'Vision-Language-Action Models',
-  'Docker'
 ]
 
 export const awards = [
