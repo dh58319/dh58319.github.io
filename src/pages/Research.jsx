@@ -70,7 +70,15 @@ export default function Research() {
                   <span className="entry-role">{t.role}</span>
                   {t.period && <span className="entry-period">{t.period}</span>}
                 </div>
-                {t.course && <p className="entry-org">{t.course}</p>}
+                {(t.course || t.org) && (
+                  <p className="entry-org">
+                    {t.course}
+                    {t.course && t.org && (
+                      <span className="entry-location"> · {t.org}</span>
+                    )}
+                    {!t.course && t.org}
+                  </p>
+                )}
                 {t.note && <p className="entry-note">{t.note}</p>}
               </li>
             ))}

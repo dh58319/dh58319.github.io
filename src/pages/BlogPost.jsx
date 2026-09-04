@@ -27,10 +27,21 @@ export default function BlogPost() {
         <h1 className="page-title">{post.title}</h1>
         <p className="blog-date">{post.date}</p>
       </header>
-      <div
-        className="blog-post-body"
-        dangerouslySetInnerHTML={{ __html: post.html }}
-      />
+      {post.url ? (
+        <div className="blog-post-body">
+          <p>{post.summary || 'This post is published elsewhere.'}</p>
+          <p>
+            <a href={post.url} target="_blank" rel="noreferrer">
+              Read it on the original site
+            </a>
+          </p>
+        </div>
+      ) : (
+        <div
+          className="blog-post-body"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
+      )}
     </article>
   )
 }

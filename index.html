@@ -9,19 +9,32 @@
       name="description"
       content="Donghyun Kim — Ph.D. student in Artificial Intelligence at Ajou University. Machine learning, Vision-Language-Action models, and embodied AI."
     />
-    <meta name="theme-color" content="#18202a" />
+    <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101315" media="(prefers-color-scheme: dark)" />
+    <link rel="canonical" href="https://dh58319.github.io/" />
 
-    <!-- Fonts: Inter (body) + Pretendard (display and name) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
-    />
+    <!-- Apply the saved theme before first paint. Without this the page renders
+         with the OS palette and then repaints once React mounts and reads
+         localStorage, which flashes for anyone whose choice differs. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+          document.documentElement.setAttribute('data-theme', theme)
+        } catch (e) {
+          /* private mode or storage disabled: fall back to the CSS media query */
+        }
+      })()
+    </script>
+
+    <!-- Fonts are self-hosted and declared in src/styles.css; no third-party
+         origin is contacted at runtime. -->
 
     <!-- Open Graph (Facebook, LinkedIn, KakaoTalk) -->
     <meta property="og:type" content="website" />
@@ -33,6 +46,10 @@
     />
     <meta property="og:url" content="https://dh58319.github.io/" />
     <meta property="og:image" content="https://dh58319.github.io/og-image.jpg?v=2" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Donghyun Kim — Research Portfolio" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

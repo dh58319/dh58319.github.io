@@ -47,9 +47,7 @@ export const bio = [
   My current research focuses on building reliable multimodal systems that can understand physical environments and support robust robotic execution.`,
 ]
 
-export const publications = [
-  
-]
+export const publications = []
 
 export const experience = [
   {
@@ -128,12 +126,15 @@ export const awards = [
       'Grand Prize — Virtual Environment-based Autonomous Driving Competition',
     year: 2023,
   },
-  { title: 'Korean Society of Medical Informatics President\'s Award — 2023 Medical AI Idea Competition',
-    year: 2023 },
+  {
+    title:
+      "Korean Society of Medical Informatics President's Award — 2023 Medical AI Idea Competition",
+    year: 2023,
+  },
 ]
 
 export const researchInterests = [
-'Vision-Language-Action Models',
+  'Vision-Language-Action Models',
   'Machine Learning & Deep Learning',
   'Medical Artificial Intelligence',
   'Computer Vision',
@@ -167,13 +168,13 @@ export const teaching = [
     org: 'Ajou University',
     period: 'Spring 2024',
   },
-    {
+  {
     role: 'Teaching Assistant',
     course: 'Computer Programming',
     org: 'Ajou University',
     period: 'Fall 2024, Spring 2025',
   },
-      {
+  {
     role: 'Teaching Assistant',
     course: 'Database',
     org: 'Ajou University',

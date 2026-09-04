@@ -1,4 +1,6 @@
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
+import { parseFrontmatter } from './lib/frontmatter.js'
 
 // Blog posts are authored as Markdown files in src/content/posts/*.md.
 // Each file has YAML-style frontmatter at the top:
@@ -23,38 +25,41 @@ const files = import.meta.glob('./content/posts/*.md', {
   eager: true,
 })
 
-function parseFrontmatter(raw) {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(raw)
-  if (!match) return { data: {}, content: raw }
 
-  const data = {}
-  for (const line of match[1].split('\n')) {
-    const idx = line.indexOf(':')
-    if (idx === -1) continue
-    const key = line.slice(0, idx).trim()
-    let val = line.slice(idx + 1).trim()
-    if (
-      (val.startsWith('"') && val.endsWith('"')) ||
-      (val.startsWith("'") && val.endsWith("'"))
-    ) {
-      val = val.slice(1, -1)
-    }
-    data[key] = val
+const parsed = Object.entries(files).map(([path, raw]) => {
+  const { data, content } = parseFrontmatter(raw)
+  const slug = data.slug || path.split('/').pop().replace(/\.md$/, '')
+  return {
+    slug,
+    path,
+    title: data.title || slug,
+    date: data.date || '',
+    summary: data.summary || '',
+    url: data.url || undefined,
+    html: data.url ? '' : DOMPurify.sanitize(marked.parse(content.trim())),
   }
-  return { data, content: raw.slice(match[0].length) }
+})
+
+// Two posts resolving to the same slug would make one of them unreachable,
+// since /blog/:slug looks up the first match. Surface it instead of hiding it.
+const seen = new Map()
+for (const post of parsed) {
+  if (seen.has(post.slug)) {
+    console.warn(
+      `[blog] duplicate slug "${post.slug}": ${seen.get(post.slug)} and ${post.path} ` +
+        `resolve to the same URL. Set a distinct \`slug:\` in the frontmatter.`,
+    )
+  }
+  seen.set(post.slug, post.path)
 }
 
-export const blogPosts = Object.entries(files)
-  .map(([path, raw]) => {
-    const { data, content } = parseFrontmatter(raw)
-    const slug = data.slug || path.split('/').pop().replace(/\.md$/, '')
-    return {
-      slug,
-      title: data.title || slug,
-      date: data.date || '',
-      summary: data.summary || '',
-      url: data.url || undefined,
-      html: data.url ? '' : marked.parse(content.trim()),
-    }
-  })
-  .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+// Dates are ISO (YYYY-MM-DD) by convention, which sorts correctly as text.
+// Anything unparseable sorts last rather than throwing off the whole list.
+const timeOf = (post) => {
+  const t = Date.parse(post.date)
+  return Number.isNaN(t) ? -Infinity : t
+}
+
+export const blogPosts = parsed.sort(
+  (a, b) => timeOf(b) - timeOf(a) || (b.date || '').localeCompare(a.date || ''),
+)

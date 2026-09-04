@@ -27,6 +27,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Test
+        run: npm run test:coverage
       # For a project page repo (e.g. "portfolio"), set BASE_PATH to "/<repo>/".
       # For a user/org page repo "<username>.github.io", leave it as "/".
       - name: Build

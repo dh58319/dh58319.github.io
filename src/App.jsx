@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { Suspense, lazy, useEffect } from 'react'
 import Navbar from './components/Navbar.jsx'
 import ProfileCard from './components/ProfileCard.jsx'
+import { useDocumentTitle } from './hooks/useDocumentTitle.js'
 import { profile } from './data.js'
 
 // Route-level code splitting: each page (and its dependencies, e.g. marked on
@@ -13,20 +14,41 @@ const BlogPost = lazy(() => import('./pages/BlogPost.jsx'))
 const Photography = lazy(() => import('./pages/Photography.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
+// Titles are keyed by path so every route is its own entry in history and in
+// search results. Unknown paths fall through to the not-found title.
+const ROUTE_TITLES = {
+  '/': `${profile.name} — Research Portfolio`,
+  '/research': `Research — ${profile.name}`,
+  '/photography': `Photography — ${profile.name}`,
+  '/blog': `Blog — ${profile.name}`,
+}
+
 export default function App() {
   const location = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location.pathname])
 
+  const title =
+    ROUTE_TITLES[location.pathname] ??
+    (location.pathname.startsWith('/blog/')
+      ? `Blog — ${profile.name}`
+      : `Page not found — ${profile.name}`)
+  useDocumentTitle(title)
+
+  // Photography gives its gallery the full measure instead of the text column.
+  const isWide = location.pathname === '/photography'
+
   return (
     <div className="app">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
-      <div className="site-layout">
-        <aside className="site-aside">
-          <ProfileCard />
-        </aside>
+      <div className={`site-layout${isWide ? ' is-wide' : ''}`}>
+        {!isWide && (
+          <aside className="site-aside">
+            <ProfileCard />
+          </aside>
+        )}
         <main id="main-content" className="page" key={location.pathname} tabIndex="-1">
           <Suspense fallback={<div className="route-fallback" aria-hidden="true" />}>
             <Routes location={location}>

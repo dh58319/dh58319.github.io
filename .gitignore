@@ -18,3 +18,7 @@ pnpm-debug.log*
 # Source artifacts not needed in the repo
 LinkedIn Profile.pdf
 동현.jpg
+.shots/
+
+# Test coverage output
+coverage

@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { profile } from '../data.js'
+import { useMediaQuery, NAV_COLLAPSE_QUERY } from '../hooks/useMediaQuery.js'
 import ThemeToggle from './ThemeToggle.jsx'
 
 const navItems = [
@@ -12,6 +13,21 @@ const navItems = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const toggleRef = useRef(null)
+  const isCollapsed = useMediaQuery(NAV_COLLAPSE_QUERY)
+
+  // Escape closes the collapsed menu and returns focus to the control that
+  // opened it, so keyboard users are not left stranded inside a hidden panel.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return
+      setOpen(false)
+      toggleRef.current?.focus()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
 
   return (
     <header className="navbar">
@@ -21,6 +37,7 @@ export default function Navbar() {
         </NavLink>
 
         <button
+          ref={toggleRef}
           type="button"
           className="nav-toggle"
           aria-label="Toggle navigation"
@@ -33,7 +50,11 @@ export default function Navbar() {
           <span />
         </button>
 
-        <nav id="primary-navigation" className={`nav-links ${open ? 'open' : ''}`}>
+        <nav
+          id="primary-navigation"
+          className={`nav-links ${open ? 'open' : ''}`}
+          inert={!open && isCollapsed ? '' : undefined}
+        >
           {navItems.map((item) => (
             <NavLink
               key={item.to}
