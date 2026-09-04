@@ -1,9 +1,10 @@
-import { copyFileSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { buildManifest } from './tools/gallery.js'
 import { parseFrontmatter } from './src/lib/frontmatter.js'
+import { SITE, STATIC_ROUTES } from './src/lib/routes.js'
 
 // GitHub Pages base path.
 // - User/Org page repo named "<username>.github.io"  -> base: '/'
@@ -60,22 +61,54 @@ function galleryManifest() {
   }
 }
 
-const SITE_ORIGIN = 'https://dh58319.github.io'
 const POSTS_DIR = resolve(__dirname, 'src/content/posts')
 
 // Blog slugs come from the filename unless the frontmatter overrides them,
 // which mirrors how src/blog.js resolves them at runtime.
-function postSlugs() {
+function postRoutes() {
   return readdirSync(POSTS_DIR)
     .filter((f) => f.endsWith('.md'))
     .map((f) => {
-      const raw = readFileSync(join(POSTS_DIR, f), 'utf8')
-      const { data } = parseFrontmatter(raw)
+      const { data } = parseFrontmatter(readFileSync(join(POSTS_DIR, f), 'utf8'))
       // Posts that link out live on someone else's site; do not claim them.
       if (data.url) return null
-      return data.slug || f.replace(/\.md$/, '')
+      const slug = data.slug || f.replace(/\.md$/, '')
+      return {
+        path: `/blog/${slug}`,
+        title: `${data.title || slug} — ${SITE.name}`,
+        description: data.summary || '',
+      }
     })
     .filter(Boolean)
+}
+
+// Rewrites the shell's per-page metadata. Everything else — the script and
+// stylesheet tags Vite injected — is shared, so each route is the same app with
+// its own head.
+function pageHtml(shell, route) {
+  const url = SITE.origin + route.path
+  // The shell formats some meta tags across several lines, so every pattern
+  // has to tolerate arbitrary whitespace between attributes.
+  const meta = (attr, name) =>
+    new RegExp(`(<meta\\s+${attr}="${name}"\\s+content=")[^"]*(")`)
+
+  let html = shell
+    .replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`)
+    .replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/, `$1${url}$2`)
+    .replace(meta('property', 'og:url'), `$1${url}$2`)
+    .replace(meta('property', 'og:title'), `$1${route.title}$2`)
+    .replace(meta('name', 'twitter:title'), `$1${route.title}$2`)
+
+  if (route.description) {
+    for (const pattern of [
+      meta('name', 'description'),
+      meta('property', 'og:description'),
+      meta('name', 'twitter:description'),
+    ]) {
+      html = html.replace(pattern, `$1${route.description}$2`)
+    }
+  }
+  return html
 }
 
 // GitHub Pages serves 404.html for any path it does not have a file for.
@@ -88,11 +121,29 @@ function githubPages() {
     name: 'github-pages-output',
     closeBundle() {
       const dir = resolve(__dirname, 'dist')
+      const shell = readFileSync(resolve(dir, 'index.html'), 'utf8')
+      const routes = [...STATIC_ROUTES, ...postRoutes()]
+
+      // A real file per route means GitHub Pages answers 200 with route-specific
+      // metadata. Without this every deep link resolves through 404.html, which
+      // renders correctly but reports 404 — so crawlers never index it.
+      for (const route of routes) {
+        const html = pageHtml(shell, route)
+        if (route.path === '/') {
+          writeFileSync(resolve(dir, 'index.html'), html)
+          continue
+        }
+        const target = resolve(dir, `.${route.path}`)
+        mkdirSync(target, { recursive: true })
+        writeFileSync(resolve(target, 'index.html'), html)
+      }
+
+      // Anything genuinely unknown still needs the app shell to render the
+      // not-found route.
       copyFileSync(resolve(dir, 'index.html'), resolve(dir, '404.html'))
 
-      const paths = ['/', '/research', '/photography', '/blog', ...postSlugs().map((s) => `/blog/${s}`)]
-      const urls = paths
-        .map((path) => `  <url><loc>${SITE_ORIGIN}${path}</loc></url>`)
+      const urls = routes
+        .map((route) => `  <url><loc>${SITE.origin}${route.path}</loc></url>`)
         .join('\n')
       writeFileSync(
         resolve(dir, 'sitemap.xml'),
