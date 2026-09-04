@@ -38,9 +38,24 @@ export const STATIC_ROUTES = [
 
 export const NOT_FOUND_TITLE = `Page not found${suffix}`
 
+// GitHub Pages serves each pre-rendered route from a directory, so it redirects
+// /research to /research/. Client-side navigation produces the unslashed form.
+// Both have to resolve to the same route.
+export function normalizePath(pathname) {
+  if (pathname.length > 1 && pathname.endsWith('/')) return pathname.slice(0, -1)
+  return pathname
+}
+
+// The URL a route should declare as canonical: the trailing-slash form the
+// server actually settles on, so the canonical link never points at a redirect.
+export function canonicalUrl(path) {
+  return path === '/' ? `${SITE.origin}/` : `${SITE.origin}${path}/`
+}
+
 export function titleFor(pathname) {
-  const match = STATIC_ROUTES.find((r) => r.path === pathname)
+  const path = normalizePath(pathname)
+  const match = STATIC_ROUTES.find((r) => r.path === path)
   if (match) return match.title
-  if (pathname.startsWith('/blog/')) return `Blog${suffix}`
+  if (path.startsWith('/blog/')) return `Blog${suffix}`
   return NOT_FOUND_TITLE
 }

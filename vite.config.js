@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { buildManifest } from './tools/gallery.js'
 import { parseFrontmatter } from './src/lib/frontmatter.js'
-import { SITE, STATIC_ROUTES } from './src/lib/routes.js'
+import { canonicalUrl, SITE, STATIC_ROUTES } from './src/lib/routes.js'
 
 // GitHub Pages base path.
 // - User/Org page repo named "<username>.github.io"  -> base: '/'
@@ -86,7 +86,7 @@ function postRoutes() {
 // stylesheet tags Vite injected — is shared, so each route is the same app with
 // its own head.
 function pageHtml(shell, route) {
-  const url = SITE.origin + route.path
+  const url = canonicalUrl(route.path)
   // The shell formats some meta tags across several lines, so every pattern
   // has to tolerate arbitrary whitespace between attributes.
   const meta = (attr, name) =>
@@ -143,7 +143,7 @@ function githubPages() {
       copyFileSync(resolve(dir, 'index.html'), resolve(dir, '404.html'))
 
       const urls = routes
-        .map((route) => `  <url><loc>${SITE.origin}${route.path}</loc></url>`)
+        .map((route) => `  <url><loc>${canonicalUrl(route.path)}</loc></url>`)
         .join('\n')
       writeFileSync(
         resolve(dir, 'sitemap.xml'),
