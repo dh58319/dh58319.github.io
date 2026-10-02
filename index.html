@@ -34,8 +34,27 @@
       })()
     </script>
 
-    <!-- Fonts are self-hosted and declared in src/styles.css; no third-party
-         origin is contacted at runtime. -->
+    <!-- Google Analytics 4. Loaded only on the production host so local dev and
+         preview builds don't pollute the stats. Route changes are counted by
+         GA4's enhanced measurement (browser history events), so the SPA needs
+         no extra page_view calls. -->
+    <script>
+      if (location.hostname === 'dh58319.github.io') {
+        var ga = document.createElement('script')
+        ga.async = true
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-2X2C13DZ5C'
+        document.head.appendChild(ga)
+        window.dataLayer = window.dataLayer || []
+        window.gtag = function () {
+          dataLayer.push(arguments)
+        }
+        gtag('js', new Date())
+        gtag('config', 'G-2X2C13DZ5C')
+      }
+    </script>
+
+    <!-- Fonts are self-hosted and declared in src/styles.css; the only
+         third-party origin contacted at runtime is Google Analytics above. -->
 
     <!-- Open Graph (Facebook, LinkedIn, KakaoTalk) -->
     <meta property="og:type" content="website" />
